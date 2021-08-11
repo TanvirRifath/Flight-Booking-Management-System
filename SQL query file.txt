@@ -1,0 +1,121 @@
+//confirmticket 
+con = DriverManager.getConnection(server,"root", "awd@3456");
+            stmt = (Statement) con.createStatement();
+            stmt.execute("use smart;");
+            r1 = stmt.executeQuery("select seat from flight where flightID ="+fid+";");
+            code = "insert into ticket(flightID,NID) values("+fid+", "+NID+");";
+r1 = stmt.executeQuery("select seat from flight where flightID ="+fid+";");
+stmt.execute("update flight set seat ="+(qts+r1.getInt(1))+" where flightID ="+fid+";");
+            stmt.execute("update flight set seat ="+(qts+r1.getInt(1))+" where flightID ="+fid+";");
+            code = "select ticketNo from ticket where flightID ="+fid+" and NID = "+NID+";";
+            r1 = stmt.executeQuery(code);
+code = "select * from customer where NID ="+NID+";";
+            r1 = stmt.executeQuery("select * from flight where flightID ="+fid+";");
+shift.setText(ss.equals("1")? "day":"night");            
+            r1 = stmt.executeQuery("Select * from route where routeID ="+rid+";");
+//oldticket
+code = "select seat, flightID from flight where routeID = ";
+                code += ""+s+e+" and day = "+date.dateToNum(d, m)+" and shift = "+sh+";";
+                r1 = stmt.executeQuery("select price from route where routeID ="+s+e+";");
+            
+//admin
+con = DriverManager.getConnection(server,"root", "awd@3456");
+            stmt = (Statement) con.createStatement();
+            stmt2 = (Statement) con.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE);
+            stmt3 = (Statement) con.createStatement();
+            
+            
+            stmt.execute("use smart;");
+            r1 = stmt.executeQuery("select busID from flight where day = "+d.today()+";");
+            
+            while(r1.next())
+            {
+                stmt2.execute("update bus set available = true where busID ="+r1.getInt(1)+";");
+            }
+        }
+stmt.execute("drop database smart;");
+stmt.execute("create database smart;");
+            JOptionPane.showMessageDialog(null,"database created");
+            stmt.execute("show databases;");
+            stmt.execute("use smart;");
+ // bus table
+            stmt.execute("create table bus (busID int not null auto_increment, available boolean, primary key(busID));");
+            // customer table
+            stmt.execute("create table customer (name varchar(50),NID int, address varchar(50), sex varchar(5),phone int);");
+            // ticket table
+            stmt.execute("create table ticket (ticketNo int not null auto_increment, flightID int, NID int, seats varchar(15), primary key(ticketNO));");
+            // route table
+            stmt.execute("create table route (routeID int, start varchar(20), end varchar(20), price int);");
+            // flight table
+            stmt.execute("create table flight ( flightID int not null auto_increment, primary key(flightID), routeID int, busID int,day int, shift int, seat int);");
+           code = "insert into bus(available) values(true);";
+                stmt.execute(code);
+code += "insert into route values ("+((i+1)*10+(j+1))+",'"+loc[i]+"','"+loc[j]+"',"+((loc[i].length()+loc[j].length())*75)+");";
+                        stmt.execute(code);
+stmt.execute("drop database smart;");
+code="insert into customer values('";
+                code+=rr.nextInt(99999)+"', '"+(i+10000)+"', '"+rr.nextInt(8888)+"', '"+(i%2==0? 'm':'f')+"',"+rr.nextInt(8888)+");";
+                System.out.println(code);
+                stmt.execute(code);
+stmt.execute("use smart;");
+            r1 = stmt.executeQuery("select max(day), day from flight;");
+            r1 = stmt.executeQuery("select count(routeID) from route;");
+            r1 = stmt2.executeQuery("select * from bus order by available desc;");
+            r2 = stmt.executeQuery("select routeID from route;");
+for(k = 0;k<c;k++)
+                    {
+                        t++;
+                        r1.next();
+                        if(!r1.getBoolean(2))
+                        {
+                            throw new Exception("No available buses for further schedule");
+                        }
+                        r2.next();
+                        code = "insert into flight(routeID,busID,day,shift,seat) values(";
+                        code += r2.getInt(1)+", "+r1.getInt(1)+", "+d+", "+j+", "+"0);";
+                        stmt3.execute(code);
+                        stmt3.execute("update bus set available = false where busID ="+r1.getInt(1)+";");
+                    }
+                }
+                d++;
+            }
+stmt.execute("use smart;");
+            stmt.execute("delete from flight");
+            stmt.execute("use smart;");
+            stmt.execute("delete from customer");
+            
+//newcustomer
+con = DriverManager.getConnection(server,"root", "awd@3456");
+            stmt = (Statement) con.createStatement();
+            stmt.execute("use smart;");
+code = "insert into customer values('"+n+"',"+this.nid+",'"+a+"','";
+                if(s == 1)
+                {
+                    code+='m';
+                }
+                else if( s==2)
+                {
+                    code +='f';
+                }
+                else
+                {
+                    code +='o';
+                }
+                code+="',"+p+");";
+                
+                System.out.println(code);
+                
+                stmt.execute(code);
+                
+                
+//oldcustomer
+
+con = DriverManager.getConnection(server,"root", "awd@3456");
+            stmt = (Statement) con.createStatement();
+            stmt.execute("use smart;");
+stmt.execute("use smart");
+            r1 = stmt.executeQuery("select count(NID) from customer where NID = "+nid);
+            r1.next();
+            
+            int c = r1.getInt(1);                
+                    
